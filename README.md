@@ -15,3 +15,9 @@ printf '%s' 'W3BhY2thZ2VdCm5hbWUgPSAiaGVsbG9fd29ybGQiCnZlcnNpb24gPSAiMC4xLjAiCmV
 mkdir -p "hello_world/src"
 printf '%s' 'Zm4gbWFpbigpIHsKICAgIHByaW50bG4hKCJIZWxsbywgd29ybGQhIik7Cn0K' | base64 -d > "hello_world/src/main.rs"
 ```
+
+## Installation
+
+```bash
+cargo install dir2sh
+```
