@@ -10,6 +10,8 @@ This Rust tool simplifies copying a folder to a remote machine by generating rea
 
 **Example clipboard output:**
 ```bash
-mkdir -p "src"
-printf '%s' 'dXNlIGJhc2U2NDo6RW5naW5lOwp1cCB9CiAgICBPaygoKSkKfQo=' | base64 -d > "src/main.rs"
+mkdir -p "hello_world"
+printf '%s' 'W3BhY2thZ2VdCm5hbWUgPSAiaGVsbG9fd29ybGQiCnZlcnNpb24gPSAiMC4xLjAiCmVkaXRpb24gPSAiMjAyNCIKCltkZXBlbmRlbmNpZXNdCg==' | base64 -d > "hello_world/Cargo.toml"
+mkdir -p "hello_world/src"
+printf '%s' 'Zm4gbWFpbigpIHsKICAgIHByaW50bG4hKCJIZWxsbywgd29ybGQhIik7Cn0K' | base64 -d > "hello_world/src/main.rs"
 ```
