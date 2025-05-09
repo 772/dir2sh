@@ -1,6 +1,8 @@
 # dir2sh
 
-This Rust tool simplifies copying a folder to a remote machine by generating ready-to-use shell commands. Designed for graphical environments (Linux/Windows), it bypasses the need for manual `scp`/`sftp`/`git` workflows by copying terminal commands directly to your clipboard.  
+This Rust tool simplifies copying a folder to a remote Linux machine by generating shell commands.
+
+Designed for graphical environments (Linux/Windows), it bypasses the need for manual `scp`/`sftp`/`git` workflows by copying terminal commands directly to your clipboard.  
 
 ## Usage
 
