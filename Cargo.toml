@@ -1,7 +1,14 @@
 [package]
 name = "dir2sh"
 version = "0.1.0"
+authors = ["Armin Schäfer"]
+description = "This Rust tool simplifies copying a folder to a remote Linux machine by generating shell commands."
+repository = "https://github.com/772/dir2sh"
+license-file = "LICENSE"
+readme = "README.md"
 edition = "2024"
+categories = ["virtualization"]
+keywords = ["cli"]
 
 [dependencies]
 arboard = "3.5.0"
