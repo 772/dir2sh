@@ -20,6 +20,8 @@ printf '%s' 'Zm4gbWFpbigpIHsKICAgIHByaW50bG4hKCJIZWxsbywgd29ybGQhIik7Cn0K' | bas
 
 ## Installation
 
+After installing Rust (https://rustup.rs/) you can install this minimalistic tool via:
+
 ```bash
 cargo install dir2sh
 ```
