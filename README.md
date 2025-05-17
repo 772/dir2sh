@@ -23,3 +23,7 @@ printf '%s' 'Zm4gbWFpbigpIHsKICAgIHByaW50bG4hKCJIZWxsbywgd29ybGQhIik7Cn0K' | bas
 ```bash
 cargo install dir2sh
 ```
+
+## Warning
+
+This tool is for small folders. Pasting a folder with 100 kilobytes takes around six seconds. You should use ```cargo clean``` before copying Rust projects with this tool e.g.
