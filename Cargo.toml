@@ -1,6 +1,6 @@
 [package]
 name = "dir2sh"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Armin Schäfer"]
 description = "This Rust tool simplifies copying a folder to a remote Linux machine by generating shell commands."
 repository = "https://github.com/772/dir2sh"
