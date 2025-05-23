@@ -12,8 +12,10 @@ fn main() -> io::Result<()> {
 fn generate_commands() -> io::Result<String> {
     let current_dir = std::env::current_dir()?;
     let dir_name = current_dir.file_name().unwrap().to_string_lossy();
-    let mut commands = format!("mkdir -p \"{dir_name}\"\n");
+    let mut commands = String::from("set +o history\n");
+    commands.push_str(&format!("mkdir -p \"{dir_name}\"\n"));
     process_directory(&current_dir, &current_dir, &mut commands)?;
+    commands.push_str("set -o history\n");
     Ok(commands)
 }
 
@@ -39,4 +41,3 @@ fn process_directory(base_dir: &Path, current_dir: &Path, commands: &mut String)
     }
     Ok(())
 }
-
