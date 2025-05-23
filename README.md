@@ -1,4 +1,6 @@
-# dir2sh
+![Logo](logo.png)
+
+## What is dir2sh?
 
 This Rust tool simplifies copying a folder to a remote Linux machine by generating shell commands.
 
@@ -12,10 +14,12 @@ Designed for graphical environments (Linux/Windows), it bypasses the need for ma
 
 **Example clipboard output:**
 ```bash
+set +o history
 mkdir -p "hello_world"
 printf '%s' 'W3BhY2thZ2VdCm5hbWUgPSAiaGVsbG9fd29ybGQiCnZlcnNpb24gPSAiMC4xLjAiCmVkaXRpb24gPSAiMjAyNCIKCltkZXBlbmRlbmNpZXNdCg==' | base64 -d > "hello_world/Cargo.toml"
 mkdir -p "hello_world/src"
 printf '%s' 'Zm4gbWFpbigpIHsKICAgIHByaW50bG4hKCJIZWxsbywgd29ybGQhIik7Cn0K' | base64 -d > "hello_world/src/main.rs"
+set -o history
 ```
 
 ## Installation
@@ -26,6 +30,7 @@ After installing Rust (https://rustup.rs/) you can install this minimalistic too
 cargo install dir2sh
 ```
 
-## Warning
+## Info
 
-This tool is for small folders. Pasting a folder with 100 kilobytes takes around six seconds. You should use ```cargo clean``` before copying Rust projects with this tool e.g.
+- This tool is for small folders. Pasting a folder with 100 kilobytes takes around six seconds. You should use ```cargo clean``` before copying Rust projects with this tool e.g.
+- It won't destroy your ```.bash_history``` because of ```set +o history```.
