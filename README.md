@@ -1,5 +1,8 @@
 ![Logo](logo.png)
 
+[![License: MIT/Apache](https://img.shields.io/badge/License-MIT%20or%20Apache2-blue.svg)](https://opensource.org/licenses/MIT)
+[![Crate](https://img.shields.io/crates/v/dir2sh.svg)](https://crates.io/crates/dir2sh)
+
 ## What is dir2sh?
 
 This Rust tool simplifies copying a folder to a remote Linux machine by generating shell commands.
