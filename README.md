@@ -1,6 +1,6 @@
 ![Logo](logo.png)
 
-[![License: MIT/Apache](https://img.shields.io/badge/License-MIT%20or%20Apache2-blue.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL3](https://img.shields.io/badge/License-GNU%20GPL-blue)](https://opensource.org/license/gpl-3-0)
 [![Crate](https://img.shields.io/crates/v/dir2sh.svg)](https://crates.io/crates/dir2sh)
 
 ## What is dir2sh?
