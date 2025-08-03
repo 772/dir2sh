@@ -11,5 +11,5 @@ categories = ["virtualization"]
 keywords = ["cli"]
 
 [dependencies]
-arboard = "3.5"
+arboard = "3.6"
 base64 = "0.22"
