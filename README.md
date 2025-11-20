@@ -37,3 +37,40 @@ cargo install dir2sh
 
 - This tool is for small folders. Pasting a folder with 100 kilobytes takes around six seconds. You should use ```cargo clean``` before copying Rust projects with this tool e.g.
 - It won't destroy your ```.bash_history``` because of ```set +o history```.
+
+## Alternative bash script
+
+```bash
+#!/bin/bash
+generate_commands() {
+    local current_dir=$(pwd)
+    local dir_name=$(basename "$current_dir")
+    local commands="set +o history\n"
+    commands+="mkdir -p \"$dir_name\"\n"
+    process_directory() {
+        local base_dir="$1"
+        local current_dir="$2"
+        while IFS= read -r -d '' file; do
+            local relative_path="${file#$base_dir/}"
+            local target_path="$dir_name/$relative_path"
+            if [[ -d "$file" ]]; then
+                commands+="mkdir -p \"$target_path\"\n"
+                process_directory "$base_dir" "$file"
+            elif [[ -f "$file" ]]; then
+                local encoded=$(base64 -w 0 "$file" 2>/dev/null || base64 -b 0 "$file")
+                commands+="printf '%s' '$encoded' | base64 -d > \"$target_path\"\n"
+            fi
+        done < <(find "$current_dir" -mindepth 1 -print0 2>/dev/null)
+    }    
+    process_directory "$current_dir" "$current_dir"
+    commands+="set -o history\n"
+    echo -e "$commands"
+}
+if command -v xclip &> /dev/null; then
+    generate_commands | xclip -selection clipboard
+    echo "Commands copied to clipboard!"
+else
+    generate_commands
+    echo "Error: Install xclip."
+fi
+```
