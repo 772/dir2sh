@@ -1,11 +1,10 @@
 ![Logo](logo.png)
 
 [![License: GPL3](https://img.shields.io/badge/License-GNU%20GPL-blue)](https://opensource.org/license/gpl-3-0)
-[![Crate](https://img.shields.io/crates/v/dir2sh.svg)](https://crates.io/crates/dir2sh)
 
 ## What is dir2sh?
 
-This Rust tool simplifies copying a folder to a remote Linux machine by generating shell commands.
+This Rust tool simplifies copying a __small__ folder to a remote Linux machine by generating shell commands.
 
 Designed for graphical environments (Linux/Windows), it bypasses the need for manual `scp`/`sftp`/`git` workflows by copying terminal commands directly to your clipboard.  
 
@@ -25,30 +24,17 @@ printf '%s' 'Zm4gbWFpbigpIHsKICAgIHByaW50bG4hKCJIZWxsbywgd29ybGQhIik7Cn0K' | bas
 set -o history
 ```
 
-## Installation
-
-After installing Rust (https://rustup.rs/) you can install this minimalistic tool via:
-
-```bash
-cargo install dir2sh
-```
-
-## Info
-
-- This tool is for small folders. Pasting a folder with 100 kilobytes takes around six seconds. You should use ```cargo clean``` before copying Rust projects with this tool e.g.
-- It won't destroy your ```.bash_history``` because of ```set +o history```.
-
-## Alternative bash script
+## Install bash command ```dir2sh``` on Linux:
 
 Fedora:
-```sudo dnf install xclip```
+```sudo dnf install xclip -y```
 
 Debian:
-```sudo apt install xclip```
+```sudo apt install xclip -y```
 
 ```bash
+sudo tee /usr/local/bin/dir2sh.sh > /dev/null << 'EOF'
 #!/bin/bash
-
 generate_commands() {
     local current_dir=$(pwd)
     local dir_name=$(basename "$current_dir")
@@ -74,4 +60,41 @@ else
     generate_commands
     echo "Error: Install xclip."
 fi
+EOF
+sudo chmod +x /usr/local/bin/dir2sh.sh
+```
+
+## Install PowerShell command ```dir2sh``` on Microsoft Windows 11:
+
+```PowerShell
+$scriptFolder = "C:\dir2sh"
+mkdir $scriptFolder -Force;
+@'
+function Generate-Commands {
+    $currentDir = (Get-Location).Path
+    $dirName = (Get-Item $currentDir).Name
+    $cmds = @("set +o history")
+    $cmds += "mkdir -p `"$dirName`""
+    Get-ChildItem -Path . -Recurse | ForEach-Object {
+        $relativePath = $_.FullName.Substring($currentDir.Length + 1)
+        $targetPath = "$dirName/$relativePath".Replace('\', '/')
+        
+        if ($_.PSIsContainer) {
+            $cmds += "mkdir -p `"$targetPath`""
+        } else {
+            $base64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes($_.FullName))
+            $cmds += "printf '%s' '$base64' | base64 -d > `"$targetPath`""
+        }
+    }
+    $cmds += "set -o history"
+    $cmds -join "`n"
+}
+try {
+    Generate-Commands | Set-Clipboard
+    Write-Host "Commands copied to clipboard!" -ForegroundColor Green
+} catch {
+    Write-Host "Fehler: $_" -ForegroundColor Red
+}
+'@ | Out-File "$scriptFolder/dir2sh.ps1"
+[Environment]::SetEnvironmentVariable("PATH", "$env:PATH;$scriptFolder", "Machine")
 ```
